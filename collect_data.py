@@ -33,7 +33,7 @@ def CollectData():
     # codec = cv2.VideoWriter_fourcc((*'png '))
     # codec = cv2.VideoWriter_fourcc(*'mjpg')
 #
-    fps = 24.0  # 指定写入帧率为30
+    fps = 10.0  # 指定写入帧率为30
     frameSize = (640, 480)  # 指定窗口大小
     # 创建 VideoWriter对象
     out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', codec, fps, frameSize)
