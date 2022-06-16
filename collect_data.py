@@ -10,9 +10,9 @@ import tkinter as tk  # 使用Tkinter前需要先导入
 
 def CollectData():
     # root='/media/arl/ssd2/collect_data_code'
-    root = 'D:/handwash-system'
+    root = ''
     # root='/media/liang/ssd22/collect_data_code'
-    video_name = os.listdir(root + '/collect_data')
+    video_name = os.listdir(root + 'collect_data')
     begin = 0
     if len(video_name) == 0:
         begin = 0
@@ -36,7 +36,7 @@ def CollectData():
     fps = 30.0  # 指定写入帧率为30
     frameSize = (640, 480)  # 指定窗口大小
     # 创建 VideoWriter对象
-    out = cv2.VideoWriter(root + '/collect_data/' + str(begin + 1) + '.avi', codec, fps, frameSize)
+    out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', codec, fps, frameSize)
     print("按键Q-结束视频录制")
 
     rat, img = cam.read()
