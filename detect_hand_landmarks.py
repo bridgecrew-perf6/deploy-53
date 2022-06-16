@@ -83,7 +83,7 @@ def detect_multihand():
         print(results.multi_hand_landmarks)
         # print(results.multi_hand_world_landmarks)
         print(results.multi_handedness)
-
+        # hello
 
 if __name__ == '__main__':
     detect_multihand()
