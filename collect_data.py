@@ -21,61 +21,55 @@ def CollectData():
             num_video = int(video_name[i].split('.')[0])
             if begin < num_video:
                 begin = num_video
-    win_row = 600
-    win_col = 1820
+
     start_all_time = time.time()
-
-    # Create a new VideoCapture object
-    cam = cv2.VideoCapture(0)
-
-    codec = cv2.VideoWriter_fourcc('M', 'J', 'P', 'G')
-
-    # codec = cv2.VideoWriter_fourcc((*'png '))
-    # codec = cv2.VideoWriter_fourcc(*'mjpg')
-#
-    fps = 5.0  # 指定写入帧率为30
-    frameSize = (640, 480)  # 指定窗口大小
-    # 创建 VideoWriter对象
-    out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', codec, fps, frameSize)
-    print("按键Q-结束视频录制")
-
-    rat, img = cam.read()
-    # Initialise variables to store current time difference as well as previous time call value
-    previous = time.time()
     cost_control_time = time.time() - start_all_time
-    # Keep looping
-    rat5 = True
-    wash_time = 10
-    while True:
-        cv2.namedWindow("guide", cv2.WINDOW_AUTOSIZE)
-        cv2.moveWindow("guide", 70, 0)
 
-        # Show the image and keep streaming
-        rat, img = cam.read()
+    wash_time = 11
 
-        if rat == False:
-            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!cannot read camera!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            break
-        if cost_control_time > wash_time:
-            print(f'time used: {cost_control_time}')
-            break
-        out.write(img)
+    # This will return video from the first webcam on your computer.
+    cap = cv2.VideoCapture(0)
+    num_f=0
+
+    #ret = cap.set(3, 320)
+
+
+    # Define the codec and create VideoWriter object
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')
+    out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', fourcc, 30, (640, 480))
+
+    # loop runs if capturing has been initialized.
+    while (cost_control_time < wash_time):
+        num_f+=1
+        # reads frames from a camera
+        # ret checks return at each frame
+        ret, frame = cap.read()
+        out.write(frame)
+        cv2.imshow('Original', frame)
+        # Wait for 'a' key to stop the program
         cost_control_time = time.time() - start_all_time
-        black = [0, 0, 0]  # ---Color of the border---
-        img = cv2.resize(img, dsize=(int(win_col / 2), int(win_row)), interpolation=cv2.INTER_CUBIC)
 
-        #        cv2.putText(back_ground,"Step: " ,(int(back_ground.shape[0]/2.5),  int(back_ground.shape[1]/3)), font, 2,(0,0,0), 2, 0)   #(col,row) begin
-        cv2.imshow("guide", cv2.flip(img, -1))
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
-            cam.release()
-            out.release()
-            cv2.destroyAllWindows()
-            print(cost_control_time)
             break
+    print(num_f/wash_time)
+    print(cap.get(3))
+    print(cap.get(4))
 
-    cam.release()
-    out.release()
+    print(cap.get(5))
+
+    # Close the window / Release webcam
+    cap.release()
     cv2.destroyAllWindows()
+
+
+CollectData()
+
+# Python program to illustrate
+# saving an operated video
+
+# organize imports
+
 
 # # 第1步，实例化object，建立窗口window
 # window = tk.Tk()
