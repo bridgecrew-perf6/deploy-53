@@ -36,7 +36,7 @@ def CollectData():
 
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', fourcc, 13, (640, 480))
+    out = cv2.VideoWriter(root + 'collect_data/' + str(begin + 1) + '.avi', fourcc, 10, (640, 480))
 
     # loop runs if capturing has been initialized.
     while (cost_control_time < wash_time):
